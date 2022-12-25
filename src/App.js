@@ -1,4 +1,5 @@
 
+import './pages/index.css';
 function App() {
   return (
       <div className="page">
@@ -24,7 +25,7 @@ function App() {
           </section>
         </main>
         <footer className="footer">
-          <p className="footer__copyright">&copy; 2020 Mesto Russia</p>
+          <p className="footer__copyright">&copy; 2023 Mesto Russia</p>
         </footer>
           <div className="popup popup_type_edit">
               <div className="popup__container">
