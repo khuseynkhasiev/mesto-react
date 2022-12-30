@@ -50,15 +50,6 @@ const avatarProfileEdit = document.querySelector('.profile__hover');
 let userId; // получаем userId для передачи в класс Card
 
 
-
-const apiConfig = {
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-54/',
-    headers: {
-        authorization: '0abf54cd-edc4-4fb9-9a14-bce409a2bf77',
-        'Content-Type': 'application/json'
-    }
-}
-
 // создаем объект для валидации
 const validationConfig = {
     formSelector: '.popup__form',

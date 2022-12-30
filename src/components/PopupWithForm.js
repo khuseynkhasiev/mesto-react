@@ -1,14 +1,6 @@
 
 
 export default function PopupWithForm({title, name, isOpen, onClose}){
-
-    const closeAllPopups = (evt) => {
-        console.log(evt);
-        /*        setEditProfilePopupOpened(false);
-                setAddPlacePopupOpened(false);
-                setEditAvatarProfilePopupOpened(false);*/
-    }
-
     return (
             <div className={`popup popup_type_${name}${isOpen ? ' popup_opened' : ''}`} onClick={onClose}>
                 <div className="popup__container" onClick={e=>e.stopPropagation()}>

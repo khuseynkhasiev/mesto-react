@@ -4,8 +4,9 @@
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     object-fit: cover;
-    display: block;
     cursor: pointer;
     background: black;
     color: white;
+    background-size: cover;
+    display: block;
 }
