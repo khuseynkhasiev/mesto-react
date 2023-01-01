@@ -1,9 +1,8 @@
 
 import editPen from '../images/avatar__edit-pen.svg';
-import preloader from '../images/preloader2.gif';
 import Card from "./Card";
 
-export default function Main({handleEditAvatarClick, handleAddPlaceClick, handleEditProfileClick, userName, userDescription, userAvatar, cards}) {
+export default function Main({handleEditAvatarClick, handleAddPlaceClick, handleEditProfileClick, handleDeleteCardClick, onCardClick, userName, userDescription, userAvatar, cards}) {
     return (
         <main className="main-content">
             <section className="profile">
@@ -22,7 +21,7 @@ export default function Main({handleEditAvatarClick, handleAddPlaceClick, handle
                 <ul className="elements__container">
                     {
                         cards.map((card) => {
-                            return <Card card={card} key={card._id}/>
+                            return <Card handleDeleteCardClick={handleDeleteCardClick} onCardClick={onCardClick} card={card} key={card._id}/>
                         })
                     }
                 </ul>
