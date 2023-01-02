@@ -1,6 +1,6 @@
 
 
-export default function PopupWithForm({title, name, isOpen, onClose, children}){
+export default function PopupWithForm({title, name, isOpen, onClose, children, textButton}){
     return (
         <div className={`popup popup_type_${name}${isOpen ? ' popup_opened' : ''}`} onClick={onClose}>
             <div className="popup__container" onClick={e=>e.stopPropagation()}>
@@ -8,6 +8,9 @@ export default function PopupWithForm({title, name, isOpen, onClose, children}){
                 <form className="popup__form" name={`popup-form-${name}`} noValidate>
                     <h3 className="popup__title">{title}</h3>
                     {children}
+                    <button className="popup__save-btn popup__save-btn_inactive" type="submit"
+                            disabled>{textButton}
+                    </button>
                 </form>
             </div>
         </div>
