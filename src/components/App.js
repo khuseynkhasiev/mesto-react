@@ -17,7 +17,7 @@ function App() {
     const [userDescription, setUserDescription] = useState('');
     const [userAvatar, setUserAvatar] = useState('');
     const [cards, setCards] = useState([]);
-    const [selectedCard, setSelectorCard] = useState(false);
+    const [selectedCard, setSelectorCard] = useState({isOpen: false});
 
     useEffect(() => {
         api.getAllPromise().then(data => {
@@ -37,7 +37,7 @@ function App() {
         setAddPlacePopupOpened(false);
         setEditAvatarProfilePopupOpened(false);
         setDeleteCardPopupOpened(false);
-        setSelectorCard(false);
+        setSelectorCard({isOpen: false});
     }
     const handleEditAvatarClick = () => {
         setEditAvatarProfilePopupOpened(true);
@@ -55,8 +55,8 @@ function App() {
         setDeleteCardPopupOpened(true);
     }
 
-    const handleCardClick = () => {
-        setSelectorCard(true);
+    const handleCardClick = ({name, link}) => {
+        setSelectorCard({isOpen: true, name: name, link: link});
     }
 
   return (
