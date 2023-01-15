@@ -4,8 +4,20 @@ import Card from "./Card";
 import {useContext} from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
-export default function Main({handleEditAvatarClick, handleAddPlaceClick, handleEditProfileClick, handleDeleteCardClick, onCardClick, /*userName, userDescription, userAvatar,*/ cards}) {
-
+export default function Main(props) {
+    const {
+        handleEditAvatarClick,
+        handleAddPlaceClick,
+        handleEditProfileClick,
+        //handleDeleteCardClick,
+        onCardClick,
+        onCardLike,
+        onCardDelete,
+        /*userName,
+        userDescription,
+        userAvatar,*/
+        cards
+    } = props;
     const currentUser = useContext(CurrentUserContext);
     const {name, about, avatar} = currentUser;
 
@@ -27,7 +39,13 @@ export default function Main({handleEditAvatarClick, handleAddPlaceClick, handle
                 <ul className="elements__container">
                     {
                         cards.map((card) => {
-                            return <Card handleDeleteCardClick={handleDeleteCardClick} onCardClick={onCardClick} card={card} key={card._id}/>
+                            return <Card
+                                //handleDeleteCardClick={handleDeleteCardClick}
+                                onCardLike={onCardLike}
+                                onCardClick={onCardClick}
+                                onCardDelete={onCardDelete}
+                                card={card}
+                                key={card._id}/>
                         })
                     }
                 </ul>

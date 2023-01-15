@@ -88,7 +88,7 @@ class Api {
             .then(res => this._checkResponse(res))
     }
 
-    // удалание карточки
+    // удаление карточки
     deleteCard(id) {
         return fetch(`${this._baseUrl}cards/${id}`, {
                 method: 'DELETE',
@@ -96,8 +96,28 @@ class Api {
             })
             .then(res => this._checkResponse(res))
     }
+
+
+    changeLikeCardStatus(id, isLiked) {
+        if (isLiked) {
+            // удаление лайка карточки
+            return fetch(`${this._baseUrl}cards/${id}/likes`, {
+                method: 'DELETE',
+                headers: this._headers
+            })
+                .then(res => this._checkResponse(res))
+        } else if(!isLiked) {
+            // добавление лайка карточке
+            return fetch(`${this._baseUrl}cards/${id}/likes`, {
+                method: 'PUT',
+                headers: this._headers,
+        })
+                .then(res => this._checkResponse(res))
+            }
+    }
+
     // добавление лайка карточке
-    putCardLike(id) {
+/*    putCardLike(id) {
         return fetch(`${this._baseUrl}cards/${id}/likes`, {
                 method: 'PUT',
                 headers: this._headers,
@@ -112,7 +132,7 @@ class Api {
                 headers: this._headers
             })
             .then(res => this._checkResponse(res))
-    }
+    }*/
 }
 
 const api = new Api(

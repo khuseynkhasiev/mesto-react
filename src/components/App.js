@@ -5,7 +5,7 @@ import Footer from "./Footer";
 import ImagePopup from './ImagePopup';
 import PopupWithForm from "./PopupWithForm";
 import {useEffect, useState} from "react";
-import api from '../utils/Api.js';
+import api from '../utils/Api';
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
 function App() {
@@ -37,6 +37,22 @@ function App() {
 
     }, []);
 
+    function handleCardLike(card) {
+        console.log(card);
+        // Снова проверяем, есть ли уже лайк на этой карточке
+        const isLiked = card.likes.some(i => i._id === currentUser._id);
+
+        // Отправляем запрос в API и получаем обновлённые данные карточки
+        api.changeLikeCardStatus(card._id, isLiked).then((newCard) => {
+            setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+        });
+    }
+
+    function handleCardDelete(card){
+        api.deleteCard(card._id)
+            .then(setCards(state => state.filter(item => item._id === card._id ? null : card)));
+    }
+
     function closeAllPopups(){
         setEditProfilePopupOpened(false);
         setAddPlacePopupOpened(false);
@@ -56,9 +72,9 @@ function App() {
         setAddPlacePopupOpened(true);
     }
 
-    const handleDeleteCardClick = () => {
+/*    const handleDeleteCardClick = () => {
         setDeleteCardPopupOpened(true);
-    }
+    }*/
 
     const handleCardClick = ({name, link}) => {
         setSelectorCard({isOpen: true, name: name, link: link});
@@ -73,11 +89,13 @@ function App() {
               <Main handleEditAvatarClick={handleEditAvatarClick}
                     handleEditProfileClick={handleEditProfileClick}
                     handleAddPlaceClick={handleAddPlaceClick}
-                    handleDeleteCardClick={handleDeleteCardClick}
+                    //handleDeleteCardClick={handleDeleteCardClick}
                     onCardClick={handleCardClick}
-                  //userName={userName}
-                  //userDescription={userDescription}
-                  //userAvatar={userAvatar}
+                    //userName={userName}
+                    //userDescription={userDescription}
+                    //userAvatar={userAvatar}
+                    onCardLike={handleCardLike}
+                    onCardDelete={handleCardDelete}
                     cards={cards}
               />
             <Footer />
