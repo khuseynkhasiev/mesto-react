@@ -90,8 +90,8 @@ function App() {
     }
 
     function handleUpdateAvatar({avatar}){
-        api.patchAvatarProfile({avatar}).then((data)=> {
-            console.log(data);
+        api.patchAvatarProfile(avatar).then((data)=> {
+            setCurrentUser(data);
             closeAllPopups();
         })
     }

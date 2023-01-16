@@ -1,3 +1,4 @@
+import React from "react";
 
 function EditAvatarPopup(props) {
     const {
@@ -7,11 +8,12 @@ function EditAvatarPopup(props) {
         onUpdateAvatar
     } = props;
 
+    const avatarRef = React.useRef('');
     function handleSubmit(e) {
         e.preventDefault();
 
         onUpdateAvatar({
-            //avatar: /* Значение инпута, полученное с помощью рефа */,
+            avatar: avatarRef.current.value,
         });
     }
 
@@ -21,7 +23,7 @@ function EditAvatarPopup(props) {
                 <button className="popup__close" type="button" aria-label="кнопка закрытия" onClick={onClose} ></button>
                 <form className="popup__form" name={`popup-form-${onSubmit}`} onSubmit={handleSubmit} noValidate>
                     <h3 className="popup__title">Обновить аватар</h3>
-                    <input type="url" className="popup__input popup__input_type_url" name="link"
+                    <input ref={avatarRef} type="url" className="popup__input popup__input_type_url" name="link"
                            id="popup-avatar-link"
                            placeholder="Ссылка на аватар" required />
                     <span className="popup__error" id="popup-avatar-link-error"></span>
