@@ -7,6 +7,8 @@ import PopupWithForm from "./PopupWithForm";
 import {useEffect, useState} from "react";
 import api from '../utils/Api';
 import CurrentUserContext from "../contexts/CurrentUserContext";
+import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
 
 function App() {
 
@@ -80,6 +82,20 @@ function App() {
         setSelectorCard({isOpen: true, name: name, link: link});
     }
 
+    function handleUpdateUser({name, about}) {
+        api.patchProfileInfo({name, about}).then((data)=> {
+            setCurrentUser(data);
+            closeAllPopups();
+        })
+    }
+
+    function handleUpdateAvatar({avatar}){
+        api.patchAvatarProfile({avatar}).then((data)=> {
+            console.log(data);
+            closeAllPopups();
+        })
+    }
+
   return (
       <CurrentUserContext.Provider value={currentUser}>
           <div className="page" onKeyDown={(evt) => {
@@ -99,15 +115,26 @@ function App() {
                     cards={cards}
               />
             <Footer />
-            <PopupWithForm title={'Обновить аватар'} name={'avatar'} isOpen={isEditAvatarProfilePopupOpened} onClose={closeAllPopups} textButton={'Сохранить'}>
+              <EditProfilePopup
+                  isOpen={isEditProfilePopupOpened}
+                  onClose={closeAllPopups}
+                  onSubmit={'edit'}
+                  onUpdateUser={handleUpdateUser}/>
+              <EditAvatarPopup
+                  isOpen={isEditAvatarProfilePopupOpened}
+                  onClose={closeAllPopups}
+                  onSubmit={'avatar'}
+                  onUpdateAvatar={handleUpdateAvatar}
+              />
+{/*            <PopupWithForm title={'Обновить аватар'} name={'avatar'} isOpen={isEditAvatarProfilePopupOpened} onClose={closeAllPopups} textButton={'Сохранить'}>
                 <>
                     <input type="url" className="popup__input popup__input_type_url" name="link"
                            id="popup-avatar-link"
                            placeholder="Ссылка на аватар" required />
                     <span className="popup__error" id="popup-avatar-link-error"></span>
                 </>
-            </PopupWithForm>
-            <PopupWithForm title={'Редактировать профиль'} name={'edit'} isOpen={isEditProfilePopupOpened} onClose={closeAllPopups} textButton={'Сохранить'}>
+            </PopupWithForm>*/}
+{/*            <PopupWithForm title={'Редактировать профиль'} name={'edit'} isOpen={isEditProfilePopupOpened} onClose={closeAllPopups} textButton={'Сохранить'}>
                 <>
                     <input type="text" className="popup__input popup__input_type_name" name="name" id="popup-name"
                            placeholder="Имя" minLength="2" maxLength="40" required />
@@ -117,7 +144,7 @@ function App() {
                            placeholder="О себе" minLength="2" maxLength="200" required />
                     <span className="popup__error" id="popup-job-error"></span>
                 </>
-            </PopupWithForm>
+            </PopupWithForm>*/}
               <PopupWithForm title={'Новое место'} name={'add'} isOpen={isAddPlacePopupOpened} onClose={closeAllPopups} textButton={'Создать'}>
                   <>
                       <input type="text" className="popup__input popup__input_type_place" name="name" id="popup-place"
