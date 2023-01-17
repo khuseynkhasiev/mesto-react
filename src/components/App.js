@@ -9,6 +9,7 @@ import api from '../utils/Api';
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
+import AddPlacePopup from "./AddPlacePopup";
 
 function App() {
 
@@ -96,6 +97,14 @@ function App() {
         })
     }
 
+    function handleAddPlaceSubmit(name, link){
+        api.postNewCard({name, link}).then((newCard) => {
+            console.log(newCard);
+            setCards([newCard, ...cards]);
+            closeAllPopups();
+        })
+    }
+
   return (
       <CurrentUserContext.Provider value={currentUser}>
           <div className="page" onKeyDown={(evt) => {
@@ -126,6 +135,12 @@ function App() {
                   onSubmit={'avatar'}
                   onUpdateAvatar={handleUpdateAvatar}
               />
+              <AddPlacePopup
+                  isOpen={isAddPlacePopupOpened}
+                  onClose={closeAllPopups}
+                  onSubmit={'add'}
+                  onAddPlace={handleAddPlaceSubmit}
+              />
 {/*            <PopupWithForm title={'Обновить аватар'} name={'avatar'} isOpen={isEditAvatarProfilePopupOpened} onClose={closeAllPopups} textButton={'Сохранить'}>
                 <>
                     <input type="url" className="popup__input popup__input_type_url" name="link"
@@ -145,7 +160,7 @@ function App() {
                     <span className="popup__error" id="popup-job-error"></span>
                 </>
             </PopupWithForm>*/}
-              <PopupWithForm title={'Новое место'} name={'add'} isOpen={isAddPlacePopupOpened} onClose={closeAllPopups} textButton={'Создать'}>
+{/*              <PopupWithForm title={'Новое место'} name={'add'} isOpen={isAddPlacePopupOpened} onClose={closeAllPopups} textButton={'Создать'}>
                   <>
                       <input type="text" className="popup__input popup__input_type_place" name="name" id="popup-place"
                              placeholder="Название" minLength="2" maxLength="30" required />
@@ -154,7 +169,7 @@ function App() {
                              placeholder="Ссылка на картинку" required />
                       <span className="popup__error" id="popup-link-error"></span>
                   </>
-              </PopupWithForm>
+              </PopupWithForm>*/}
               <PopupWithForm title={'Вы уверены?'} name={'delete'} isOpen={isDeleteCardPopupOpened} onClose={closeAllPopups} textButton={'Да'}>
               </PopupWithForm>
             <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
