@@ -32,7 +32,6 @@ function EditProfilePopup(props) {
     }
 
     function handleSubmit(e) {
-        //console.log('submit')
         // Запрещаем браузеру переходить по адресу формы
         e.preventDefault();
 

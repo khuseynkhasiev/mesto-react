@@ -9,13 +9,9 @@ export default function Main(props) {
         handleEditAvatarClick,
         handleAddPlaceClick,
         handleEditProfileClick,
-        //handleDeleteCardClick,
         onCardClick,
         onCardLike,
         onCardDelete,
-        /*userName,
-        userDescription,
-        userAvatar,*/
         cards
     } = props;
     const currentUser = useContext(CurrentUserContext);
@@ -40,7 +36,6 @@ export default function Main(props) {
                     {
                         cards.map((card) => {
                             return <Card
-                                //handleDeleteCardClick={handleDeleteCardClick}
                                 onCardLike={onCardLike}
                                 onCardClick={onCardClick}
                                 onCardDelete={onCardDelete}

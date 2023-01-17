@@ -4,7 +4,6 @@ import CurrentUserContext from "../contexts/CurrentUserContext";
 export default function Card(props) {
     const {
         card,
-        //handleDeleteCardClick,
         onCardClick,
         onCardLike,
         onCardDelete
@@ -29,10 +28,9 @@ export default function Card(props) {
     }
     return (
         <li className="elements__el">
-
             {isOwn ? (
                 <button className="elements__trash elements__trash_visible" type="button"
-                        aria-label="кнопка удаления карточки" onClick={handleDeleteClick/*handleDeleteCardClick*/} ></button>
+                        aria-label="кнопка удаления карточки" onClick={handleDeleteClick}></button>
             ) : null}
             <img className="elements__img" onClick={handleClick} alt={card.name} src={card.link}/>
             <div className="elements__info">
