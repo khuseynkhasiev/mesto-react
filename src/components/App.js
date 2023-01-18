@@ -19,6 +19,8 @@ function App() {
     const [cards, setCards] = useState([]);
     const [selectedCard, setSelectorCard] = useState({isOpen: false});
     const [currentUser, setCurrentUser] = useState({});
+    const [nameEditButton, setNameButton] = useState('Сохранить');
+    const [nameAddButton, setNameAddButton] = useState('Создать')
 
     useEffect(() => {
         api.getAllPromise().then(data => {
@@ -65,25 +67,31 @@ function App() {
         setSelectorCard({isOpen: true, name: name, link: link});
     }
     function handleUpdateUser({name, about}) {
+        setNameButton('Сохранение...');
         api.patchProfileInfo({name, about})
             .then((data)=> {
             setCurrentUser(data);
             closeAllPopups();
         }).catch((data) => console.log(data.error))
+            .finally(() => setNameButton('Сохранить'))
     }
     function handleUpdateAvatar({avatar}){
+        setNameButton('Сохранение...');
         api.patchAvatarProfile(avatar)
             .then((data)=> {
             setCurrentUser(data);
             closeAllPopups();
         }).catch((data) => console.log(data.error))
+            .finally(() => setNameButton('Сохранить'))
     }
     function handleAddPlaceSubmit({name, link}){
+        setNameAddButton('Сохранение...')
         api.postNewCard({name, link})
             .then((newCard) => {
             setCards([newCard, ...cards]);
             closeAllPopups();
         }).catch((data) => console.log(data.error))
+            .finally(() => setNameAddButton('Создать'))
     }
 
   return (
@@ -104,16 +112,20 @@ function App() {
               <EditProfilePopup
                   isOpen={isEditProfilePopupOpened}
                   onClose={closeAllPopups}
-                  onUpdateUser={handleUpdateUser}/>
+                  onUpdateUser={handleUpdateUser}
+                  isNameButton={nameEditButton}
+              />
               <EditAvatarPopup
                   isOpen={isEditAvatarProfilePopupOpened}
                   onClose={closeAllPopups}
                   onUpdateAvatar={handleUpdateAvatar}
+                  isNameButton={nameEditButton}
               />
               <AddPlacePopup
                   isOpen={isAddPlacePopupOpened}
                   onClose={closeAllPopups}
                   onAddPlace={handleAddPlaceSubmit}
+                  isNameButton={nameAddButton}
               />
               <DeleteCardPopup
                   isOpen={isDeleteCardPopupOpened}

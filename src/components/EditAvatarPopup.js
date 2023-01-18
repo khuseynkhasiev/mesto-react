@@ -5,7 +5,8 @@ function EditAvatarPopup(props) {
     const {
         isOpen,
         onClose,
-        onUpdateAvatar
+        onUpdateAvatar,
+        isNameButton
     } = props;
     const avatarRef = React.useRef('');
     function handleSubmit(e) {
@@ -16,7 +17,7 @@ function EditAvatarPopup(props) {
         });
     }
     return (
-        <PopupWithForm title={'Обновить аватар'} name={'avatar'} isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit} textButton={'Сохранить'}>
+        <PopupWithForm title={'Обновить аватар'} name={'avatar'} isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit} textButton={isNameButton}>
             <>
                 <input ref={avatarRef} type="url" className="popup__input popup__input_type_url" name="link"
                        id="popup-avatar-link"

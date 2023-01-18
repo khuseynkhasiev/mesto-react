@@ -5,7 +5,8 @@ function AddPlacePopup(props) {
     const {
         isOpen,
         onClose,
-        onAddPlace
+        onAddPlace,
+        isNameButton
     } = props;
 
     const [formValues, setFormValues] = useState({name: '', link: ''});
@@ -20,7 +21,7 @@ function AddPlacePopup(props) {
     }
     return (
         <PopupWithForm title={'Новое место'} name={'add'} isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit}
-                       textButton={'Создать'}>
+                       textButton={isNameButton}>
             <>
                 <input onChange={handleChange} type="text" className="popup__input popup__input_type_place" name="name"
                        id="popup-place"

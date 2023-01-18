@@ -7,7 +7,8 @@ function EditProfilePopup(props) {
     const {
         isOpen,
         onClose,
-        onUpdateUser
+        onUpdateUser,
+        isNameButton
     } = props;
 
     const [name, setName] = useState('');
@@ -39,7 +40,7 @@ function EditProfilePopup(props) {
         });
     }
     return (
-        <PopupWithForm title={'Редактировать профиль'} name={'add'} isOpen={isOpen} onSubmit={handleSubmit} onClose={onClose} textButton={'Сохранить'}>
+        <PopupWithForm title={'Редактировать профиль'} name={'add'} isOpen={isOpen} onSubmit={handleSubmit} onClose={onClose} textButton={isNameButton}>
             <>
                 <input onChange={handleChangeName} type="text" className="popup__input popup__input_type_name" name="name" id="popup-name"
                        placeholder="Имя" value={name} minLength="2" maxLength="40" required />
