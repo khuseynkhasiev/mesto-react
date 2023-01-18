@@ -19,7 +19,7 @@ function App() {
     const [cards, setCards] = useState([]);
     const [selectedCard, setSelectorCard] = useState({isOpen: false});
     const [currentUser, setCurrentUser] = useState({});
-    const [nameEditButton, setNameButton] = useState('Сохранить');
+    const [nameEditButton, setNameEditButton] = useState('Сохранить');
     const [nameAddButton, setNameAddButton] = useState('Создать')
 
     useEffect(() => {
@@ -67,22 +67,22 @@ function App() {
         setSelectorCard({isOpen: true, name: name, link: link});
     }
     function handleUpdateUser({name, about}) {
-        setNameButton('Сохранение...');
+        setNameEditButton('Сохранение...');
         api.patchProfileInfo({name, about})
             .then((data)=> {
             setCurrentUser(data);
             closeAllPopups();
         }).catch((data) => console.log(data.error))
-            .finally(() => setNameButton('Сохранить'))
+            .finally(() => setNameEditButton('Сохранить'))
     }
     function handleUpdateAvatar({avatar}){
-        setNameButton('Сохранение...');
+        setNameEditButton('Сохранение...');
         api.patchAvatarProfile(avatar)
             .then((data)=> {
             setCurrentUser(data);
             closeAllPopups();
         }).catch((data) => console.log(data.error))
-            .finally(() => setNameButton('Сохранить'))
+            .finally(() => setNameEditButton('Сохранить'))
     }
     function handleAddPlaceSubmit({name, link}){
         setNameAddButton('Сохранение...')
