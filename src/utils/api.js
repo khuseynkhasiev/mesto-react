@@ -87,7 +87,6 @@ class Api {
             })
             .then(res => this._checkResponse(res))
     }
-
     // удаление карточки
     deleteCard(id) {
         return fetch(`${this._baseUrl}cards/${id}`, {
@@ -96,7 +95,6 @@ class Api {
             })
             .then(res => this._checkResponse(res))
     }
-
 
     changeLikeCardStatus(id, isLiked) {
         if (isLiked) {
@@ -115,26 +113,7 @@ class Api {
                 .then(res => this._checkResponse(res))
             }
     }
-
-    // добавление лайка карточке
-/*    putCardLike(id) {
-        return fetch(`${this._baseUrl}cards/${id}/likes`, {
-                method: 'PUT',
-                headers: this._headers,
-            })
-            .then(res => this._checkResponse(res))
-    }
-
-    // удаление лайка карточки
-    deleteCardLike(id) {
-        return fetch(`${this._baseUrl}cards/${id}/likes`, {
-                method: 'DELETE',
-                headers: this._headers
-            })
-            .then(res => this._checkResponse(res))
-    }*/
 }
-
 const api = new Api(
     {
         baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-54/',

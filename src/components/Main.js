@@ -1,4 +1,3 @@
-
 import editPen from '../images/avatar__edit-pen.svg';
 import Card from "./Card";
 import {useContext} from "react";
@@ -16,7 +15,6 @@ export default function Main(props) {
     } = props;
     const currentUser = useContext(CurrentUserContext);
     const {name, about, avatar} = currentUser;
-
     return (
         <main className="main-content">
             <section className="profile">

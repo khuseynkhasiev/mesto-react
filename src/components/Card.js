@@ -1,6 +1,6 @@
 import { useContext} from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
-
+import DeleteCardPopup from "./DeleteCardPopup";
 export default function Card(props) {
     const {
         card,
@@ -14,7 +14,6 @@ export default function Card(props) {
     function handleDeleteClick(){
         onCardDelete(card);
     }
-
     const currentUser = useContext(CurrentUserContext);
     const isOwn = card.owner._id === currentUser._id;
     const isLiked = card.likes.some(i => i._id === currentUser._id);
